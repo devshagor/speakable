@@ -10,7 +10,7 @@
 	var Notice      = components.Notice;
 
 	// Settings passed from PHP via wp_localize_script.
-	var config = window.wpTtsBlockEditor || {};
+	var config = window.wpSpeechBlockEditor || {};
 
 	blocks.registerBlockType( 'wpspeech/player', {
 

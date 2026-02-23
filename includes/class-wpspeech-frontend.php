@@ -68,7 +68,7 @@ class WPSPEECH_Frontend {
 			true
 		);
 
-		wp_localize_script( 'wpspeech-frontend', 'wpTtsSettings', array(
+		wp_localize_script( 'wpspeech-frontend', 'wpSpeechSettings', array(
 			'voiceName'        => isset( $this->options['voice_name'] ) ? $this->options['voice_name'] : '',
 			'speechRate'       => isset( $this->options['speech_rate'] ) ? (float) $this->options['speech_rate'] : 1.0,
 			'pitch'            => isset( $this->options['pitch'] ) ? (float) $this->options['pitch'] : 1.0,

@@ -109,7 +109,7 @@ class WPSPEECH_Blocks {
 		$enabled_types = isset( $options['enabled_post_types'] ) ? (array) $options['enabled_post_types'] : array( 'post' );
 		$button_color  = isset( $options['button_color'] ) ? $options['button_color'] : '#d60017';
 
-		wp_localize_script( 'wpspeech-player-editor-script', 'wpTtsBlockEditor', array(
+		wp_localize_script( 'wpspeech-player-editor-script', 'wpSpeechBlockEditor', array(
 			'enabledPostTypes' => $enabled_types,
 			'buttonColor'      => $button_color,
 			'settingsUrl'      => admin_url( 'admin.php?page=wpspeech' ),

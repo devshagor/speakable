@@ -21,6 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WPSPEECH_Admin {
 
 	/**
+	 * Stores the actual hook suffixes returned by add_menu_page / add_submenu_page
+	 * so enqueue_admin_assets can compare against the real values WordPress generates.
+	 *
+	 * @since 1.0.0
+	 * @var array
+	 */
+	private $page_hooks = array();
+
+	/**
 	 * Constructor. Register hooks.
 	 *
 	 * @since 1.0.0
@@ -39,7 +48,7 @@ class WPSPEECH_Admin {
 	 * @return void
 	 */
 	public function add_settings_page() {
-		add_menu_page(
+		$this->page_hooks['settings'] = add_menu_page(
 			__( 'WP Speech', 'wpspeech' ),
 			__( 'WP Speech', 'wpspeech' ),
 			'manage_options',
@@ -49,6 +58,7 @@ class WPSPEECH_Admin {
 			80
 		);
 
+		// First submenu mirrors the parent slug — hook is the same as the top-level page.
 		add_submenu_page(
 			'wpspeech',
 			__( 'Settings', 'wpspeech' ),
@@ -58,7 +68,7 @@ class WPSPEECH_Admin {
 			array( $this, 'render_settings_page' )
 		);
 
-		add_submenu_page(
+		$this->page_hooks['analytics'] = add_submenu_page(
 			'wpspeech',
 			__( 'Analytics', 'wpspeech' ),
 			__( 'Analytics', 'wpspeech' ),
@@ -67,7 +77,7 @@ class WPSPEECH_Admin {
 			array( $this, 'render_analytics_page' )
 		);
 
-		add_submenu_page(
+		$this->page_hooks['help'] = add_submenu_page(
 			'wpspeech',
 			__( 'Help', 'wpspeech' ),
 			__( 'Help', 'wpspeech' ),
@@ -147,13 +157,7 @@ class WPSPEECH_Admin {
 	 * @return void
 	 */
 	public function enqueue_admin_assets( $hook ) {
-		$plugin_pages = array(
-			'toplevel_page_wpspeech',
-			'wpspeech_page_wpspeech-analytics',
-			'wpspeech_page_wpspeech-help'
-		);
-
-		if ( ! in_array( $hook, $plugin_pages, true ) ) {
+		if ( ! in_array( $hook, $this->page_hooks, true ) ) {
 			return;
 		}
 
@@ -165,7 +169,7 @@ class WPSPEECH_Admin {
 		);
 
 		// Settings page needs color picker and admin JS.
-		if ( 'toplevel_page_wpspeech' === $hook ) {
+		if ( isset( $this->page_hooks['settings'] ) && $this->page_hooks['settings'] === $hook ) {
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script(
 				'wpspeech-admin',

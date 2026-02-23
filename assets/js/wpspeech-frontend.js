@@ -5,8 +5,8 @@
 	if ( ! ( 'speechSynthesis' in window ) ) {
 		var player = document.querySelector( '.wpspeech-player' );
 		if ( player ) {
-			var msg = ( window.wpTtsSettings && window.wpTtsSettings.i18n && window.wpTtsSettings.i18n.unsupported )
-			? window.wpTtsSettings.i18n.unsupported
+			var msg = ( window.wpSpeechSettings && window.wpSpeechSettings.i18n && window.wpSpeechSettings.i18n.unsupported )
+			? window.wpSpeechSettings.i18n.unsupported
 			: 'Text-to-speech is not supported in this browser.';
 		player.innerHTML = '<p class="wpspeech-unsupported">' + msg + '</p>';
 		}
@@ -14,7 +14,7 @@
 	}
 
 	var synth    = window.speechSynthesis;
-	var settings = window.wpTtsSettings || {};
+	var settings = window.wpSpeechSettings || {};
 	var i18n     = settings.i18n || {};
 
 	// State.
@@ -146,7 +146,7 @@
 
 		utterance.onerror = function ( e ) {
 			if ( e.error !== 'canceled' ) {
-				console.warn( 'WP TTS error:', e.error );
+				console.warn( 'WP Speech error:', e.error );
 			}
 			resetPlayer();
 		};
