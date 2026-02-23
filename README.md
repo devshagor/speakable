@@ -1,4 +1,4 @@
-# Wpspeech
+# Wp Speech
 
 A WordPress plugin that adds text-to-speech to your posts and pages. Works on the web via the **Web Speech API** and exposes a **REST API** for React Native and other mobile apps to use native TTS engines.
 
