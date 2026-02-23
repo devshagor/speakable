@@ -1,8 +1,8 @@
 <?php
 /**
- * Frontend player for Wpspeech.
+ * Frontend player for WP Speech.
  *
- * @package Wpspeech
+ * @package WP Speech
  * @since   1.0.0
  */
 
@@ -81,6 +81,9 @@ class WPSPEECH_Frontend {
 				'listen'      => __( 'Listen', 'wpspeech' ),
 				'pause'       => __( 'Pause', 'wpspeech' ),
 				'resume'      => __( 'Resume', 'wpspeech' ),
+				'stop'        => __( 'Stop', 'wpspeech' ),
+				'playing'     => __( 'Playing', 'wpspeech' ),
+				'paused'      => __( 'Paused', 'wpspeech' ),
 				'unsupported' => __( 'Text-to-speech is not supported in this browser.', 'wpspeech' ),
 			),
 		) );

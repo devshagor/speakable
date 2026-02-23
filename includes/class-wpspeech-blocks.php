@@ -1,8 +1,8 @@
 <?php
 /**
- * Gutenberg blocks registration for Wpspeech.
+ * Gutenberg blocks registration for WP Speech.
  *
- * @package Wpspeech
+ * @package WP Speech
  * @since   1.1.0
  */
 

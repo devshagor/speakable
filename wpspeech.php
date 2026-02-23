@@ -1,8 +1,8 @@
 <?php
 /**
- * Wpspeech
+ * WP Speech
  *
- * @package           Wpspeech
+ * @package WP Speech
  * @author            Devshagor
  * @license           GPL-2.0-or-later
  *

@@ -2,7 +2,7 @@
 /**
  * Server-side rendering for the TTS Player block.
  *
- * @package Wpspeech
+ * @package WP Speech
  * @since   1.1.0
  *
  * @var array    $attributes Block attributes.

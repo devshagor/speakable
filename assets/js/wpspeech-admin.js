@@ -128,6 +128,7 @@
 
 		// ---- Preview ----
 		var isPreviewPlaying = false;
+		var adminI18n = ( window.wpSpeechAdmin && window.wpSpeechAdmin.i18n ) ? window.wpSpeechAdmin.i18n : {};
 
 		$( '#wpspeech-preview-btn' ).on( 'click', function () {
 			var text = $( '#wpspeech-preview-text' ).val();
@@ -177,7 +178,7 @@
 
 		function startPreviewUI() {
 			isPreviewPlaying = true;
-			$( '#wpspeech-preview-label' ).text( 'Playing...' );
+			$( '#wpspeech-preview-label' ).text( adminI18n.playing || 'Playing...' );
 			$( '#wpspeech-preview-btn' ).css( 'background', 'linear-gradient(135deg, #d60017, #b50014)' );
 			$( '#wpspeech-stop-preview-btn' ).show();
 			$( '#wpspeech-wave' ).show();
@@ -185,7 +186,7 @@
 
 		function stopPreviewUI() {
 			isPreviewPlaying = false;
-			$( '#wpspeech-preview-label' ).text( 'Play Preview' );
+			$( '#wpspeech-preview-label' ).text( adminI18n.playPreview || 'Play Preview' );
 			$( '#wpspeech-preview-btn' ).css( 'background', '' );
 			$( '#wpspeech-stop-preview-btn' ).hide();
 			$( '#wpspeech-wave' ).hide();

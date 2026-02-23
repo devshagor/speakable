@@ -1,10 +1,10 @@
 <?php
 /**
- * Uninstall handler for Wpspeech.
+ * Uninstall handler for WP Speech.
  *
  * Removes all plugin data when the plugin is deleted via the WordPress admin.
  *
- * @package Wpspeech
+ * @package WP Speech
  * @since   1.0.0
  */
 

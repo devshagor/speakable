@@ -1,10 +1,10 @@
 <?php
 /**
- * REST API endpoints for Wpspeech.
+ * REST API endpoints for WP Speech.
  *
  * Provides speech data for React Native and other mobile apps.
  *
- * @package Wpspeech
+ * @package WP Speech
  * @since   1.0.0
  */
 

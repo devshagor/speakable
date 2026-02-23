@@ -1,8 +1,8 @@
 <?php
 /**
- * Admin settings page for Wpspeech.
+ * Admin settings page for WP Speech.
  *
- * @package Wpspeech
+ * @package WP Speech
  * @since   1.0.0
  */
 
@@ -178,6 +178,13 @@ class WPSPEECH_Admin {
 				WPSPEECH_VERSION,
 				true
 			);
+			wp_localize_script( 'wpspeech-admin', 'wpSpeechAdmin', array(
+				'i18n' => array(
+					'stop'        => __( 'Stop', 'wpspeech' ),
+					'playPreview' => __( 'Play Preview', 'wpspeech' ),
+					'playing'     => __( 'Playing...', 'wpspeech' ),
+				),
+			) );
 		}
 	}
 
@@ -445,7 +452,7 @@ class WPSPEECH_Admin {
 							<div class="wpspeech-preview-area">
 								<textarea id="wpspeech-preview-text" rows="4" class="wpspeech-textarea"
 									placeholder="<?php esc_attr_e( 'Type something to hear it spoken aloud...', 'wpspeech' ); ?>"
-								><?php esc_html_e( 'Welcome to Wpspeech. This plugin lets your visitors listen to articles with a single click. Try adjusting the speed, pitch, and volume in the Voice tab to find the perfect settings for your audience.', 'wpspeech' ); ?></textarea>
+								><?php esc_html_e( 'Welcome to WP Speech. This plugin lets your visitors listen to articles with a single click. Try adjusting the speed, pitch, and volume in the Voice tab to find the perfect settings for your audience.', 'wpspeech' ); ?></textarea>
 
 								<div class="wpspeech-preview-controls">
 									<button type="button" id="wpspeech-preview-btn" class="wpspeech-btn-preview">
@@ -699,7 +706,7 @@ class WPSPEECH_Admin {
 						?>
 						<div class="wpspeech-feature-row">
 							<div class="wpspeech-feature-left">
-								<span class="wpspeech-feature-icon"><?php echo $feature['icon']; ?></span>
+								<span class="wpspeech-feature-icon"><?php echo wp_kses_post( $feature['icon'] ); ?></span>
 								<span class="wpspeech-feature-name"><?php echo esc_html( $feature['name'] ); ?></span>
 							</div>
 							<?php if ( $feature['enabled'] ) : ?>
@@ -785,7 +792,7 @@ class WPSPEECH_Admin {
 
 						<div class="wpspeech-help-item">
 							<h3 class="wpspeech-help-q"><?php esc_html_e( 'How does this plugin work?', 'wpspeech' ); ?></h3>
-							<p class="wpspeech-help-a"><?php esc_html_e( 'Wpspeech uses the Web Speech API built into modern browsers. It reads the article text aloud using system voices on the visitor\'s device. No external API or server required - it\'s completely free.', 'wpspeech' ); ?></p>
+							<p class="wpspeech-help-a"><?php esc_html_e( 'WP Speech uses the Web Speech API built into modern browsers. It reads the article text aloud using system voices on the visitor\'s device. No external API or server required - it\'s completely free.', 'wpspeech' ); ?></p>
 						</div>
 
 						<div class="wpspeech-help-item">

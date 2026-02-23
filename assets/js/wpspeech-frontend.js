@@ -8,7 +8,11 @@
 			var msg = ( window.wpSpeechSettings && window.wpSpeechSettings.i18n && window.wpSpeechSettings.i18n.unsupported )
 			? window.wpSpeechSettings.i18n.unsupported
 			: 'Text-to-speech is not supported in this browser.';
-		player.innerHTML = '<p class="wpspeech-unsupported">' + msg + '</p>';
+		var unsupportedP = document.createElement( 'p' );
+		unsupportedP.className = 'wpspeech-unsupported';
+		unsupportedP.textContent = msg;
+		player.innerHTML = '';
+		player.appendChild( unsupportedP );
 		}
 		return;
 	}
@@ -279,7 +283,7 @@
 			'</div>' +
 			'<div class="wpspeech-sticky-wave"><span></span><span></span><span></span><span></span></div>' +
 			'<span class="wpspeech-sticky-counter"></span>' +
-			'<button type="button" class="wpspeech-sticky-stop" aria-label="' + 'Stop' + '">' +
+			'<button type="button" class="wpspeech-sticky-stop" aria-label="' + ( i18n.stop || 'Stop' ) + '">' +
 				'<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>' +
 			'</button>';
 
@@ -321,13 +325,13 @@
 			stickyPlayIcon.style.display  = 'none';
 			stickyPauseIcon.style.display = 'inline';
 			stickyPlayBtn.setAttribute( 'aria-label', i18n.pause || 'Pause' );
-			if ( stickyTitle ) { stickyTitle.textContent = i18n.pause || 'Playing'; }
+			if ( stickyTitle ) { stickyTitle.textContent = i18n.playing || 'Playing'; }
 			if ( stickyWave ) { stickyWave.style.display = 'flex'; }
 		} else if ( isPaused ) {
 			stickyPlayIcon.style.display  = 'inline';
 			stickyPauseIcon.style.display = 'none';
 			stickyPlayBtn.setAttribute( 'aria-label', i18n.resume || 'Resume' );
-			if ( stickyTitle ) { stickyTitle.textContent = i18n.resume || 'Paused'; }
+			if ( stickyTitle ) { stickyTitle.textContent = i18n.paused || 'Paused'; }
 			if ( stickyWave ) { stickyWave.style.display = 'none'; }
 		} else {
 			stickyPlayIcon.style.display  = 'inline';

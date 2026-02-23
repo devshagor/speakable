@@ -1,4 +1,4 @@
-=== Wpspeech ===
+=== WP Speech ===
 Contributors: devshagor
 Donate link: https://devshagor.com/
 Tags: text-to-speech, tts, accessibility, audio, speech
@@ -13,7 +13,7 @@ Add a text-to-speech player to your posts and pages using the browser's built-in
 
 == Description ==
 
-Wpspeech adds a play button to your articles that reads the content aloud using the browser's built-in speech synthesis engine. No external API keys, no usage costs, no third-party services.
+WP Speech adds a play button to your articles that reads the content aloud using the browser's built-in speech synthesis engine. No external API keys, no usage costs, no third-party services.
 
 **Features:**
 

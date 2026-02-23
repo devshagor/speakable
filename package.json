@@ -1,7 +1,7 @@
 {
 	"name": "wpspeech",
 	"version": "1.0.0",
-	"description": "Wpspeech - Browser-based TTS player for WordPress",
+	"description": "WP Speech - Browser-based TTS player for WordPress",
 	"author": "Devshagor",
 	"license": "GPL-2.0-or-later",
 	"private": true,
