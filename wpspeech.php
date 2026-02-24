@@ -74,18 +74,6 @@ function wpspeech_activate() {
 }
 register_activation_hook( __FILE__, 'wpspeech_activate' );
 
-/**
- * Load plugin text domain for translations.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function wpspeech_load_textdomain() {
-	load_plugin_textdomain( 'wpspeech', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-}
-add_action( 'plugins_loaded', 'wpspeech_load_textdomain' );
-
 // Load admin class (admin only).
 if ( is_admin() ) {
 	require_once WPSPEECH_PLUGIN_DIR . 'includes/class-wpspeech-admin.php';

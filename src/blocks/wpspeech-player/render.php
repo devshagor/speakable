@@ -20,7 +20,7 @@ $button_color  = isset( $options['button_color'] ) ? $options['button_color'] : 
 $show_progress = ! empty( $options['show_progress_bar'] );
 $show_speed    = ! empty( $options['show_speed_control'] );
 ?>
-<div <?php echo get_block_wrapper_attributes(); ?>>
+<div <?php echo esc_attr(get_block_wrapper_attributes()); ?>>
 	<div class="wpspeech-player" role="region" aria-label="<?php esc_attr_e( 'WP Speech Player', 'wpspeech' ); ?>"
 		style="--wpspeech-color: <?php echo esc_attr( $button_color ); ?>;">
 
