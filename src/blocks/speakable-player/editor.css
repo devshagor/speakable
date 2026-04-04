@@ -2,12 +2,12 @@
    TTS Player Block — Editor Preview
    ============================================= */
 
-.wpspeech-block-preview {
+.speakable-block-preview {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
 }
 
 /* ---- Info Notice ---- */
-.wpspeech-block-notice {
+.speakable-block-notice {
 	display: flex;
 	align-items: flex-start;
 	gap: 8px;
@@ -21,64 +21,64 @@
 	line-height: 1.5;
 }
 
-.wpspeech-block-notice svg {
+.speakable-block-notice svg {
 	flex-shrink: 0;
 	margin-top: 1px;
 }
 
 /* ---- Player Mockup ---- */
-.wpspeech-block-player {
+.speakable-block-player {
 	background: #f8f9fa;
 	border: 1px solid #e2e4e7;
 	border-radius: 10px;
 	padding: 14px 18px;
 }
 
-.wpspeech-block-header-row {
+.speakable-block-header-row {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	margin-bottom: 12px;
 }
 
-.wpspeech-block-headphone {
-	color: var(--wpspeech-color, #d60017);
+.speakable-block-headphone {
+	color: var(--speakable-color, #d60017);
 	flex-shrink: 0;
 }
 
-.wpspeech-block-title {
+.speakable-block-title {
 	font-size: 13px;
 	font-weight: 600;
 	color: #1e293b;
 	line-height: 1.3;
 }
 
-.wpspeech-block-subtitle {
+.speakable-block-subtitle {
 	font-size: 11px;
 	color: #94a3b8;
 	line-height: 1.3;
 }
 
 /* Controls */
-.wpspeech-block-controls {
+.speakable-block-controls {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 }
 
-.wpspeech-block-play-btn {
+.speakable-block-play-btn {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
 	padding: 7px 14px;
-	background: var(--wpspeech-color, #d60017);
+	background: var(--speakable-color, #d60017);
 	color: #fff;
 	border-radius: 6px;
 	font-size: 12px;
 	font-weight: 600;
 }
 
-.wpspeech-block-stop-btn {
+.speakable-block-stop-btn {
 	display: inline-flex;
 	align-items: center;
 	padding: 7px 9px;
@@ -88,7 +88,7 @@
 	opacity: 0.5;
 }
 
-.wpspeech-block-speed {
+.speakable-block-speed {
 	padding: 4px 8px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -97,14 +97,14 @@
 	background: #fff;
 }
 
-.wpspeech-block-counter {
+.speakable-block-counter {
 	margin-left: auto;
 	font-size: 11px;
 	color: #94a3b8;
 }
 
 /* Progress */
-.wpspeech-block-progress {
+.speakable-block-progress {
 	height: 4px;
 	background: #e2e4e7;
 	border-radius: 3px;
@@ -112,14 +112,14 @@
 	overflow: hidden;
 }
 
-.wpspeech-block-progress-fill {
+.speakable-block-progress-fill {
 	height: 100%;
 	width: 35%;
-	background: var(--wpspeech-color, #d60017);
+	background: var(--speakable-color, #d60017);
 	border-radius: 3px;
 }
 
 /* ---- Selected state highlight ---- */
-.wp-block-wpspeech-player.is-selected .wpspeech-block-player {
-	box-shadow: 0 0 0 1px var(--wpspeech-color, #d60017);
+.wp-block-speakable-player.is-selected .speakable-block-player {
+	box-shadow: 0 0 0 1px var(--speakable-color, #d60017);
 }

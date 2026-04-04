@@ -1,9 +1,9 @@
 <?php
 /**
- * Gutenberg blocks registration for WP Speech.
+ * Gutenberg blocks registration for Speakable.
  *
- * @package WP Speech
- * @since   1.1.0
+ * @package Speakable
+ * @since   1.0.0
  */
 
 // Exit if accessed directly.
@@ -12,21 +12,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WPSPEECH_Blocks
+ * Class SPEAKABLE_Blocks
  *
  * Registers all Gutenberg blocks provided by the plugin.
  * Blocks source lives in src/blocks/{block-name}/.
  * After `npm run build`, compiled files go to build/blocks/{block-name}/.
  * The class tries build/ first, falls back to src/ for development.
  *
- * @since 1.1.0
+ * @since 1.0.0
  */
-class WPSPEECH_Blocks {
+class SPEAKABLE_Blocks {
 
 	/**
 	 * Constructor. Register hooks.
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_blocks' ) );
@@ -39,7 +39,7 @@ class WPSPEECH_Blocks {
 	 * Scans for block.json in build/ (production) or src/ (development)
 	 * and registers every block found automatically.
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
@@ -57,14 +57,14 @@ class WPSPEECH_Blocks {
 	 * Prefers build/ (compiled) over src/ (source) for each block.
 	 * This allows the plugin to work both with and without a build step.
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 *
 	 * @return array List of absolute paths to block directories containing block.json.
 	 */
 	private function discover_blocks() {
 		$blocks     = array();
-		$build_dir  = WPSPEECH_PLUGIN_DIR . 'build/blocks/';
-		$src_dir    = WPSPEECH_PLUGIN_DIR . 'src/blocks/';
+		$build_dir  = SPEAKABLE_PLUGIN_DIR . 'build/blocks/';
+		$src_dir    = SPEAKABLE_PLUGIN_DIR . 'src/blocks/';
 
 		// Scan src/blocks/ for all block folders.
 		$scan_dir = is_dir( $src_dir ) ? $src_dir : '';
@@ -73,7 +73,7 @@ class WPSPEECH_Blocks {
 		}
 
 		$entries = scandir( $scan_dir );
-		if ( ! $entries ) {
+		if ( false === $entries ) {
 			return $blocks;
 		}
 
@@ -100,19 +100,19 @@ class WPSPEECH_Blocks {
 	 * Pass plugin settings to the block editor so blocks can show
 	 * smart warnings about duplicate players.
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
 	public function localize_editor_data() {
-		$options       = get_option( WPSPEECH_OPTION_KEY, array() );
+		$options       = get_option( SPEAKABLE_OPTION_KEY, array() );
 		$enabled_types = isset( $options['enabled_post_types'] ) ? (array) $options['enabled_post_types'] : array( 'post' );
 		$button_color  = isset( $options['button_color'] ) ? $options['button_color'] : '#d60017';
 
-		wp_localize_script( 'wpspeech-player-editor-script', 'wpSpeechBlockEditor', array(
+		wp_localize_script( 'speakable-player-editor-script', 'speakableBlockEditor', array(
 			'enabledPostTypes' => $enabled_types,
 			'buttonColor'      => $button_color,
-			'settingsUrl'      => admin_url( 'admin.php?page=wpspeech' ),
+			'settingsUrl'      => admin_url( 'admin.php?page=speakable' ),
 		) );
 	}
 }

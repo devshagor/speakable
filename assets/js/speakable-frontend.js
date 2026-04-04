@@ -3,13 +3,13 @@
 
 	// Bail if Web Speech API is not supported.
 	if ( ! ( 'speechSynthesis' in window ) ) {
-		var player = document.querySelector( '.wpspeech-player' );
+		var player = document.querySelector( '.speakable-player' );
 		if ( player ) {
-			var msg = ( window.wpSpeechSettings && window.wpSpeechSettings.i18n && window.wpSpeechSettings.i18n.unsupported )
-			? window.wpSpeechSettings.i18n.unsupported
+			var msg = ( window.speakableSettings && window.speakableSettings.i18n && window.speakableSettings.i18n.unsupported )
+			? window.speakableSettings.i18n.unsupported
 			: 'Text-to-speech is not supported in this browser.';
 		var unsupportedP = document.createElement( 'p' );
-		unsupportedP.className = 'wpspeech-unsupported';
+		unsupportedP.className = 'speakable-unsupported';
 		unsupportedP.textContent = msg;
 		player.innerHTML = '';
 		player.appendChild( unsupportedP );
@@ -18,7 +18,7 @@
 	}
 
 	var synth    = window.speechSynthesis;
-	var settings = window.wpSpeechSettings || {};
+	var settings = window.speakableSettings || {};
 	var i18n     = settings.i18n || {};
 
 	// State.
@@ -40,16 +40,16 @@
 	document.addEventListener( 'DOMContentLoaded', init );
 
 	function init() {
-		playerEl     = document.querySelector( '.wpspeech-player' );
-		playBtn      = document.querySelector( '.wpspeech-play' );
-		stopBtn      = document.querySelector( '.wpspeech-stop' );
-		playIcon     = document.querySelector( '.wpspeech-icon-play' );
-		pauseIcon    = document.querySelector( '.wpspeech-icon-pause' );
-		btnLabel     = document.querySelector( '.wpspeech-btn-label' );
-		progressFill = document.querySelector( '.wpspeech-progress-fill' );
-		progressBar  = document.querySelector( '.wpspeech-progress-bar' );
-		timeDisplay  = document.querySelector( '.wpspeech-time' );
-		speedSelect  = document.querySelector( '.wpspeech-speed-select' );
+		playerEl     = document.querySelector( '.speakable-player' );
+		playBtn      = document.querySelector( '.speakable-play' );
+		stopBtn      = document.querySelector( '.speakable-stop' );
+		playIcon     = document.querySelector( '.speakable-icon-play' );
+		pauseIcon    = document.querySelector( '.speakable-icon-pause' );
+		btnLabel     = document.querySelector( '.speakable-btn-label' );
+		progressFill = document.querySelector( '.speakable-progress-fill' );
+		progressBar  = document.querySelector( '.speakable-progress-bar' );
+		timeDisplay  = document.querySelector( '.speakable-time' );
+		speedSelect  = document.querySelector( '.speakable-speed-select' );
 
 		// Find article content - try theme-specific then generic selectors.
 		contentEl = document.querySelector( '.single-post-body' )
@@ -63,7 +63,7 @@
 
 		// Extract text: clone content and remove the player before reading.
 		var contentClone = contentEl.cloneNode( true );
-		var playerInClone = contentClone.querySelector( '.wpspeech-player' );
+		var playerInClone = contentClone.querySelector( '.speakable-player' );
 		if ( playerInClone ) {
 			playerInClone.remove();
 		}
@@ -150,7 +150,7 @@
 
 		utterance.onerror = function ( e ) {
 			if ( e.error !== 'canceled' ) {
-				console.warn( 'WP Speech error:', e.error );
+				console.warn( 'Speakable error:', e.error );
 			}
 			resetPlayer();
 		};
@@ -181,21 +181,21 @@
 			btnLabel.textContent    = i18n.pause || 'Pause';
 			playBtn.setAttribute( 'aria-label', i18n.pause || 'Pause' );
 			stopBtn.disabled        = false;
-			playerEl.classList.add( 'wpspeech-active' );
+			playerEl.classList.add( 'speakable-active' );
 		} else if ( isPaused ) {
 			playIcon.style.display  = 'inline';
 			pauseIcon.style.display = 'none';
 			btnLabel.textContent    = i18n.resume || 'Resume';
 			playBtn.setAttribute( 'aria-label', i18n.resume || 'Resume' );
 			stopBtn.disabled        = false;
-			playerEl.classList.add( 'wpspeech-active' );
+			playerEl.classList.add( 'speakable-active' );
 		} else {
 			playIcon.style.display  = 'inline';
 			pauseIcon.style.display = 'none';
 			btnLabel.textContent    = i18n.listen || 'Listen';
 			playBtn.setAttribute( 'aria-label', i18n.listen || 'Listen' );
 			stopBtn.disabled        = true;
-			playerEl.classList.remove( 'wpspeech-active' );
+			playerEl.classList.remove( 'speakable-active' );
 		}
 		updateStickyUI();
 	}
@@ -267,35 +267,35 @@
 		var color = settings.buttonColor || '#d60017';
 
 		stickyEl = document.createElement( 'div' );
-		stickyEl.className = 'wpspeech-sticky';
+		stickyEl.className = 'speakable-sticky';
 		stickyEl.setAttribute( 'role', 'region' );
-		stickyEl.setAttribute( 'aria-label', i18n.listen || 'WP Speech Player' );
-		stickyEl.style.cssText = '--wpspeech-color: ' + color + ';';
+		stickyEl.setAttribute( 'aria-label', i18n.listen || 'Speakable Player' );
+		stickyEl.style.cssText = '--speakable-color: ' + color + ';';
 
 		stickyEl.innerHTML =
-			'<button type="button" class="wpspeech-sticky-play" aria-label="' + ( i18n.pause || 'Pause' ) + '">' +
-				'<svg class="wpspeech-sticky-icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>' +
-				'<svg class="wpspeech-sticky-icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>' +
+			'<button type="button" class="speakable-sticky-play" aria-label="' + ( i18n.pause || 'Pause' ) + '">' +
+				'<svg class="speakable-sticky-icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>' +
+				'<svg class="speakable-sticky-icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>' +
 			'</button>' +
-			'<div class="wpspeech-sticky-info">' +
-				'<span class="wpspeech-sticky-title">' + ( i18n.listen || 'Listen' ) + '</span>' +
-				'<div class="wpspeech-sticky-progress"><div class="wpspeech-sticky-progress-fill"></div></div>' +
+			'<div class="speakable-sticky-info">' +
+				'<span class="speakable-sticky-title">' + ( i18n.listen || 'Listen' ) + '</span>' +
+				'<div class="speakable-sticky-progress"><div class="speakable-sticky-progress-fill"></div></div>' +
 			'</div>' +
-			'<div class="wpspeech-sticky-wave"><span></span><span></span><span></span><span></span></div>' +
-			'<span class="wpspeech-sticky-counter"></span>' +
-			'<button type="button" class="wpspeech-sticky-stop" aria-label="' + ( i18n.stop || 'Stop' ) + '">' +
+			'<div class="speakable-sticky-wave"><span></span><span></span><span></span><span></span></div>' +
+			'<span class="speakable-sticky-counter"></span>' +
+			'<button type="button" class="speakable-sticky-stop" aria-label="' + ( i18n.stop || 'Stop' ) + '">' +
 				'<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>' +
 			'</button>';
 
 		document.body.appendChild( stickyEl );
 
 		// Cache references.
-		stickyPlayBtn      = stickyEl.querySelector( '.wpspeech-sticky-play' );
-		stickyStopBtn      = stickyEl.querySelector( '.wpspeech-sticky-stop' );
-		stickyProgressFill = stickyEl.querySelector( '.wpspeech-sticky-progress-fill' );
-		stickyCounter      = stickyEl.querySelector( '.wpspeech-sticky-counter' );
-		stickyPlayIcon     = stickyEl.querySelector( '.wpspeech-sticky-icon-play' );
-		stickyPauseIcon    = stickyEl.querySelector( '.wpspeech-sticky-icon-pause' );
+		stickyPlayBtn      = stickyEl.querySelector( '.speakable-sticky-play' );
+		stickyStopBtn      = stickyEl.querySelector( '.speakable-sticky-stop' );
+		stickyProgressFill = stickyEl.querySelector( '.speakable-sticky-progress-fill' );
+		stickyCounter      = stickyEl.querySelector( '.speakable-sticky-counter' );
+		stickyPlayIcon     = stickyEl.querySelector( '.speakable-sticky-icon-play' );
+		stickyPauseIcon    = stickyEl.querySelector( '.speakable-sticky-icon-pause' );
 
 		// Mirror events to the main player controls.
 		stickyPlayBtn.addEventListener( 'click', togglePlayPause );
@@ -308,9 +308,9 @@
 		}
 		// Show sticky only when playing/paused AND original player is out of view.
 		if ( ( isPlaying || isPaused ) && ! playerVisible ) {
-			stickyEl.classList.add( 'wpspeech-sticky-visible' );
+			stickyEl.classList.add( 'speakable-sticky-visible' );
 		} else {
-			stickyEl.classList.remove( 'wpspeech-sticky-visible' );
+			stickyEl.classList.remove( 'speakable-sticky-visible' );
 		}
 	}
 
@@ -318,8 +318,8 @@
 		if ( ! stickyEl ) {
 			return;
 		}
-		var stickyTitle = stickyEl.querySelector( '.wpspeech-sticky-title' );
-		var stickyWave  = stickyEl.querySelector( '.wpspeech-sticky-wave' );
+		var stickyTitle = stickyEl.querySelector( '.speakable-sticky-title' );
+		var stickyWave  = stickyEl.querySelector( '.speakable-sticky-wave' );
 
 		if ( isPlaying ) {
 			stickyPlayIcon.style.display  = 'none';

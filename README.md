@@ -1,4 +1,4 @@
-# WP Speech
+# Speakable
 
 A WordPress plugin that adds a browser-based text-to-speech player to your posts and pages using the **Web Speech API** — completely free, no API keys, no external services. Also exposes an optional **REST API** for React Native and mobile apps.
 
@@ -26,10 +26,10 @@ A WordPress plugin that adds a browser-based text-to-speech player to your posts
 
 ## Admin Menu
 
-The plugin adds a top-level **WP Speech** menu to the WordPress sidebar with three pages:
+The plugin adds a top-level **Speakable** menu to the WordPress sidebar with three pages:
 
 ```
-WP Speech
+Speakable
 ├── Settings
 │   ├── Voice tab     — voice, speed, pitch, volume
 │   ├── Display tab   — post types, button colour, position, player features
@@ -43,16 +43,16 @@ WP Speech
 
 ## Installation
 
-1. Upload the `wpspeech` folder to `/wp-content/plugins/`
+1. Upload the `speakable` folder to `/wp-content/plugins/`
 2. Activate the plugin via **Plugins** in WordPress admin
-3. Go to **WP Speech → Settings** to configure voice and display options
+3. Go to **Speakable → Settings** to configure voice and display options
 4. Visit any single post to see the player in action
 
 ---
 
 ## Settings Reference
 
-### Voice Tab (`WP Speech → Settings → Voice`)
+### Voice Tab (`Speakable → Settings → Voice`)
 
 | Setting | Default | Range |
 |---------|---------|-------|
@@ -63,7 +63,7 @@ WP Speech
 
 > Voices are provided by the visitor's operating system. The saved voice name is a preference — if it is unavailable on a visitor's device, their browser default is used.
 
-### Display Tab (`WP Speech → Settings → Display`)
+### Display Tab (`Speakable → Settings → Display`)
 
 | Setting | Default | Options |
 |---------|---------|---------|
@@ -74,11 +74,11 @@ WP Speech
 | Speed Control | On | On / Off |
 | Sticky Player | On | On / Off |
 
-### Preview Tab (`WP Speech → Settings → Preview`)
+### Preview Tab (`Speakable → Settings → Preview`)
 
 Type or paste any text and click **Play Preview** to hear the current voice settings spoken aloud. The player mockup below updates live when you change the button colour.
 
-### API Tab (`WP Speech → Settings → API`)
+### API Tab (`Speakable → Settings → API`)
 
 Toggle the REST API on or off. All endpoints are shown here for reference. The API is **disabled by default**.
 
@@ -86,7 +86,7 @@ Toggle the REST API on or off. All endpoints are shown here for reference. The A
 
 ## Gutenberg Block
 
-Search for **"WP Speech Player"** in the block inserter to place the player at any exact position within your content. When the block is present in a post, global auto-insertion via the `the_content` filter is automatically skipped for that post to prevent duplicate players.
+Search for **"Speakable Player"** in the block inserter to place the player at any exact position within your content. When the block is present in a post, global auto-insertion via the `the_content` filter is automatically skipped for that post to prevent duplicate players.
 
 ---
 
@@ -101,9 +101,9 @@ Search for **"WP Speech Player"** in the block inserter to place the player at a
 
 ## REST API
 
-The REST API is **opt-in** and must be enabled from **WP Speech → Settings → API**. All endpoints are read-only and expose only published post content — the same content already visible to any site visitor. No authentication is required.
+The REST API is **opt-in** and must be enabled from **Speakable → Settings → API**. All endpoints are read-only and expose only published post content — the same content already visible to any site visitor. No authentication is required.
 
-**Base URL:** `https://yoursite.com/wp-json/wpspeech/v1`
+**Base URL:** `https://yoursite.com/wp-json/speakable/v1`
 
 ---
 
@@ -122,10 +122,10 @@ Returns article content as clean plain text split into sentences, ready for nati
 ```json
 {
   "post_id": 42,
-  "title": "Getting Started with WP Speech",
-  "plain_text": "WP Speech adds a text-to-speech player to your posts...",
+  "title": "Getting Started with Speakable",
+  "plain_text": "Speakable adds a text-to-speech player to your posts...",
   "sentences": [
-    "WP Speech adds a text-to-speech player to your posts.",
+    "Speakable adds a text-to-speech player to your posts.",
     "It uses the Web Speech API built into modern browsers.",
     "..."
   ],
@@ -138,7 +138,7 @@ Returns article content as clean plain text split into sentences, ready for nati
     "volume": 1.0,
     "voice_name": ""
   },
-  "excerpt": "WP Speech adds a text-to-speech player to your posts...",
+  "excerpt": "Speakable adds a text-to-speech player to your posts...",
   "featured_image": "https://yoursite.com/wp-content/uploads/cover.jpg",
   "author": "John Doe",
   "date": "2025-06-15T10:30:00+00:00"
@@ -149,8 +149,8 @@ Returns article content as clean plain text split into sentences, ready for nati
 
 | Status | Code | Reason |
 |--------|------|--------|
-| 404 | `wpspeech_post_not_found` | Post doesn't exist or isn't published |
-| 403 | `wpspeech_not_enabled` | TTS not enabled for this post type |
+| 404 | `speakable_post_not_found` | Post doesn't exist or isn't published |
+| 403 | `speakable_not_enabled` | TTS not enabled for this post type |
 
 ---
 
@@ -194,14 +194,14 @@ Returns a paginated list of posts that have TTS enabled.
   "posts": [
     {
       "id": 42,
-      "title": "Getting Started with WP Speech",
-      "excerpt": "WP Speech adds a text-to-speech player...",
+      "title": "Getting Started with Speakable",
+      "excerpt": "Speakable adds a text-to-speech player...",
       "word_count": 450,
       "estimated_duration_seconds": 180,
       "featured_image": "https://yoursite.com/wp-content/uploads/cover.jpg",
       "author": "John Doe",
       "date": "2025-06-15T10:30:00+00:00",
-      "speech_endpoint": "https://yoursite.com/wp-json/wpspeech/v1/speech/42"
+      "speech_endpoint": "https://yoursite.com/wp-json/speakable/v1/speech/42"
     }
   ],
   "total": 25,
@@ -237,7 +237,7 @@ export function ArticlePlayer({ postId }) {
   const [title, setTitle]         = useState('');
 
   useEffect(() => {
-    fetch(`${SITE_URL}/wp-json/wpspeech/v1/speech/${postId}`)
+    fetch(`${SITE_URL}/wp-json/speakable/v1/speech/${postId}`)
       .then(res => res.json())
       .then(data => {
         setSentences(data.sentences);
@@ -299,7 +299,7 @@ export function useArticleTTS(postId) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    fetch(`${SITE_URL}/wp-json/wpspeech/v1/speech/${postId}`)
+    fetch(`${SITE_URL}/wp-json/speakable/v1/speech/${postId}`)
       .then(res => res.json())
       .then(data => {
         setSentences(data.sentences);
@@ -342,33 +342,33 @@ export function useArticleTTS(postId) {
 ## File Structure
 
 ```
-wpspeech/
-├── wpspeech.php                          # Plugin bootstrap, constants, activation hook
+speakable/
+├── speakable.php                          # Plugin bootstrap, constants, activation hook
 ├── uninstall.php                         # Removes plugin data on deletion
 ├── readme.txt                            # WordPress.org listing
 ├── package.json                          # npm config for building blocks
 ├── .gitignore
 ├── assets/
 │   ├── css/
-│   │   ├── wpspeech-admin.css            # Admin dashboard styles
-│   │   └── wpspeech-frontend.css         # Frontend player styles
+│   │   ├── speakable-admin.css            # Admin dashboard styles
+│   │   └── speakable-frontend.css         # Frontend player styles
 │   └── js/
-│       ├── wpspeech-admin.js             # Admin: tabs, sliders, voice picker, preview
-│       └── wpspeech-frontend.js          # Frontend: Web Speech API player
+│       ├── speakable-admin.js             # Admin: tabs, sliders, voice picker, preview
+│       └── speakable-frontend.js          # Frontend: Web Speech API player
 ├── includes/
-│   ├── class-wpspeech-admin.php          # WP Speech menu + Settings / Analytics / Help pages
-│   ├── class-wpspeech-frontend.php       # the_content filter, asset enqueue
-│   ├── class-wpspeech-blocks.php         # Gutenberg block registration
-│   └── class-wpspeech-rest-api.php       # REST API endpoints
+│   ├── class-speakable-admin.php          # Speakable menu + Settings / Analytics / Help pages
+│   ├── class-speakable-frontend.php       # the_content filter, asset enqueue
+│   ├── class-speakable-blocks.php         # Gutenberg block registration
+│   └── class-speakable-rest-api.php       # REST API endpoints
 ├── src/
 │   └── blocks/
-│       └── wpspeech-player/
+│       └── speakable-player/
 │           ├── block.json                # Block metadata
 │           ├── index.js                  # Block editor script
 │           ├── editor.css                # Block editor styles
 │           └── render.php                # Server-side render
 └── languages/
-    └── wpspeech.pot                      # Translation template (103 strings)
+    └── speakable.pot                      # Translation template (103 strings)
 ```
 
 ---

@@ -1,8 +1,8 @@
 <?php
 /**
- * Frontend player for WP Speech.
+ * Frontend player for Speakable.
  *
- * @package WP Speech
+ * @package Speakable
  * @since   1.0.0
  */
 
@@ -12,13 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WPSPEECH_Frontend
+ * Class SPEAKABLE_Frontend
  *
  * Injects the TTS player into post content and enqueues frontend assets.
  *
  * @since 1.0.0
  */
-class WPSPEECH_Frontend {
+class SPEAKABLE_Frontend {
 
 	/**
 	 * Plugin options.
@@ -34,7 +34,7 @@ class WPSPEECH_Frontend {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$this->options = get_option( WPSPEECH_OPTION_KEY, array() );
+		$this->options = get_option( SPEAKABLE_OPTION_KEY, array() );
 		add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_assets' ) );
 		add_filter( 'the_content', array( $this, 'inject_player' ), 20 );
 	}
@@ -54,21 +54,21 @@ class WPSPEECH_Frontend {
 		}
 
 		wp_enqueue_style(
-			'wpspeech-frontend',
-			WPSPEECH_PLUGIN_URL . 'assets/css/wpspeech-frontend.css',
+			'speakable-frontend',
+			SPEAKABLE_PLUGIN_URL . 'assets/css/speakable-frontend.css',
 			array(),
-			WPSPEECH_VERSION
+			SPEAKABLE_VERSION
 		);
 
 		wp_enqueue_script(
-			'wpspeech-frontend',
-			WPSPEECH_PLUGIN_URL . 'assets/js/wpspeech-frontend.js',
+			'speakable-frontend',
+			SPEAKABLE_PLUGIN_URL . 'assets/js/speakable-frontend.js',
 			array(),
-			WPSPEECH_VERSION,
+			SPEAKABLE_VERSION,
 			true
 		);
 
-		wp_localize_script( 'wpspeech-frontend', 'wpSpeechSettings', array(
+		wp_localize_script( 'speakable-frontend', 'speakableSettings', array(
 			'voiceName'        => isset( $this->options['voice_name'] ) ? $this->options['voice_name'] : '',
 			'speechRate'       => isset( $this->options['speech_rate'] ) ? (float) $this->options['speech_rate'] : 1.0,
 			'pitch'            => isset( $this->options['pitch'] ) ? (float) $this->options['pitch'] : 1.0,
@@ -78,13 +78,13 @@ class WPSPEECH_Frontend {
 			'buttonColor'      => isset( $this->options['button_color'] ) ? $this->options['button_color'] : '#d60017',
 			'stickyPlayer'     => ! empty( $this->options['sticky_player'] ),
 			'i18n'             => array(
-				'listen'      => __( 'Listen', 'wpspeech' ),
-				'pause'       => __( 'Pause', 'wpspeech' ),
-				'resume'      => __( 'Resume', 'wpspeech' ),
-				'stop'        => __( 'Stop', 'wpspeech' ),
-				'playing'     => __( 'Playing', 'wpspeech' ),
-				'paused'      => __( 'Paused', 'wpspeech' ),
-				'unsupported' => __( 'Text-to-speech is not supported in this browser.', 'wpspeech' ),
+				'listen'      => __( 'Listen', 'speakable' ),
+				'pause'       => __( 'Pause', 'speakable' ),
+				'resume'      => __( 'Resume', 'speakable' ),
+				'stop'        => __( 'Stop', 'speakable' ),
+				'playing'     => __( 'Playing', 'speakable' ),
+				'paused'      => __( 'Paused', 'speakable' ),
+				'unsupported' => __( 'Text-to-speech is not supported in this browser.', 'speakable' ),
 			),
 		) );
 	}
@@ -103,7 +103,7 @@ class WPSPEECH_Frontend {
 		}
 
 		// Skip auto-injection if the TTS block is manually placed in the content.
-		if ( has_block( 'wpspeech/player', get_the_ID() ) ) {
+		if ( has_block( 'speakable/player', get_the_ID() ) ) {
 			return $content;
 		}
 
@@ -113,38 +113,38 @@ class WPSPEECH_Frontend {
 
 		ob_start();
 		?>
-		<div class="wpspeech-player" role="region" aria-label="<?php esc_attr_e( 'WP Speech Player', 'wpspeech' ); ?>"
-			style="--wpspeech-color: <?php echo esc_attr( $button_color ); ?>;">
+		<div class="speakable-player" role="region" aria-label="<?php esc_attr_e( 'Speakable Player', 'speakable' ); ?>"
+			style="--speakable-color: <?php echo esc_attr( $button_color ); ?>;">
 
-			<div class="wpspeech-header-row">
-				<span class="wpspeech-headphone-icon" aria-hidden="true">
+			<div class="speakable-header-row">
+				<span class="speakable-headphone-icon" aria-hidden="true">
 					<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
 				</span>
 				<div>
-					<p class="wpspeech-player-title"><?php esc_html_e( 'Listen to this article', 'wpspeech' ); ?></p>
-					<p class="wpspeech-player-subtitle"><?php esc_html_e( 'Powered by WP Speech', 'wpspeech' ); ?></p>
+					<p class="speakable-player-title"><?php esc_html_e( 'Listen to this article', 'speakable' ); ?></p>
+					<p class="speakable-player-subtitle"><?php esc_html_e( 'Powered by Speakable', 'speakable' ); ?></p>
 				</div>
 			</div>
 
-			<div class="wpspeech-controls">
-				<button type="button" class="wpspeech-btn wpspeech-play" aria-label="<?php esc_attr_e( 'Play', 'wpspeech' ); ?>">
-					<svg class="wpspeech-icon wpspeech-icon-play" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="5,3 19,12 5,21"/></svg>
-					<svg class="wpspeech-icon wpspeech-icon-pause" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="display:none;" aria-hidden="true" focusable="false"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-					<span class="wpspeech-btn-label"><?php esc_html_e( 'Listen', 'wpspeech' ); ?></span>
+			<div class="speakable-controls">
+				<button type="button" class="speakable-btn speakable-play" aria-label="<?php esc_attr_e( 'Play', 'speakable' ); ?>">
+					<svg class="speakable-icon speakable-icon-play" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><polygon points="5,3 19,12 5,21"/></svg>
+					<svg class="speakable-icon speakable-icon-pause" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="display:none;" aria-hidden="true" focusable="false"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+					<span class="speakable-btn-label"><?php esc_html_e( 'Listen', 'speakable' ); ?></span>
 				</button>
 
-				<button type="button" class="wpspeech-btn wpspeech-stop" aria-label="<?php esc_attr_e( 'Stop', 'wpspeech' ); ?>" disabled>
+				<button type="button" class="speakable-btn speakable-stop" aria-label="<?php esc_attr_e( 'Stop', 'speakable' ); ?>" disabled>
 					<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false"><rect x="5" y="5" width="14" height="14" rx="2"/></svg>
 				</button>
 
-				<div class="wpspeech-wave" aria-hidden="true">
+				<div class="speakable-wave" aria-hidden="true">
 					<span></span><span></span><span></span><span></span><span></span>
 				</div>
 
 				<?php if ( $show_speed ) : ?>
-				<div class="wpspeech-speed-control">
-					<label for="wpspeech-speed" class="screen-reader-text"><?php esc_html_e( 'Playback speed', 'wpspeech' ); ?></label>
-					<select id="wpspeech-speed" class="wpspeech-speed-select">
+				<div class="speakable-speed-control">
+					<label for="speakable-speed" class="screen-reader-text"><?php esc_html_e( 'Playback speed', 'speakable' ); ?></label>
+					<select id="speakable-speed" class="speakable-speed-select">
 						<option value="0.75">0.75x</option>
 						<option value="1" selected>1x</option>
 						<option value="1.25">1.25x</option>
@@ -154,12 +154,12 @@ class WPSPEECH_Frontend {
 				</div>
 				<?php endif; ?>
 
-				<span class="wpspeech-time" role="status" aria-live="polite"></span>
+				<span class="speakable-time" role="status" aria-live="polite"></span>
 			</div>
 
 			<?php if ( $show_progress ) : ?>
-			<div class="wpspeech-progress-bar" role="progressbar" aria-label="<?php esc_attr_e( 'Reading progress', 'wpspeech' ); ?>" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-				<div class="wpspeech-progress-fill"></div>
+			<div class="speakable-progress-bar" role="progressbar" aria-label="<?php esc_attr_e( 'Reading progress', 'speakable' ); ?>" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+				<div class="speakable-progress-fill"></div>
 			</div>
 			<?php endif; ?>
 		</div>
@@ -192,7 +192,7 @@ class WPSPEECH_Frontend {
 	/**
 	 * Check if the current singular post contains the TTS player block.
 	 *
-	 * @since 1.1.0
+	 * @since 1.0.0
 	 *
 	 * @return bool True if the block is present.
 	 */
@@ -200,6 +200,6 @@ class WPSPEECH_Frontend {
 		if ( ! is_singular() ) {
 			return false;
 		}
-		return has_block( 'wpspeech/player', get_queried_object_id() );
+		return has_block( 'speakable/player', get_queried_object_id() );
 	}
 }

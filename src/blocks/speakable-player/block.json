@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "wpspeech/player",
+	"name": "speakable/player",
 	"version": "1.0.0",
-	"title": "WP Speech Player",
+	"title": "Speakable Player",
 	"category": "widgets",
 	"icon": "controls-volumeon",
 	"description": "Add a text-to-speech player anywhere in your content. Automatically disables the global auto-insertion for this post.",
@@ -13,7 +13,7 @@
 		"multiple": false,
 		"reusable": false
 	},
-	"textdomain": "wpspeech",
+	"textdomain": "speakable",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./editor.css",
 	"render": "file:./render.php"

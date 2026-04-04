@@ -8,25 +8,25 @@
 			var tab = $tab.data( 'tab' );
 
 			// Update ARIA on all tabs.
-			$( '.wpspeech-tab' ).removeClass( 'wpspeech-tab-active' )
+			$( '.speakable-tab' ).removeClass( 'speakable-tab-active' )
 				.attr( 'aria-selected', 'false' )
 				.attr( 'tabindex', '-1' );
-			$tab.addClass( 'wpspeech-tab-active' )
+			$tab.addClass( 'speakable-tab-active' )
 				.attr( 'aria-selected', 'true' )
 				.removeAttr( 'tabindex' );
 
 			// Update panels.
-			$( '.wpspeech-tab-panel' ).removeClass( 'wpspeech-tab-panel-active' );
-			$( '.wpspeech-tab-panel[data-panel="' + tab + '"]' ).addClass( 'wpspeech-tab-panel-active' );
+			$( '.speakable-tab-panel' ).removeClass( 'speakable-tab-panel-active' );
+			$( '.speakable-tab-panel[data-panel="' + tab + '"]' ).addClass( 'speakable-tab-panel-active' );
 		}
 
-		$( '.wpspeech-tab' ).on( 'click', function () {
+		$( '.speakable-tab' ).on( 'click', function () {
 			activateTab( $( this ) );
 		});
 
 		// Arrow key navigation between tabs.
-		$( '.wpspeech-tab' ).on( 'keydown', function ( e ) {
-			var $tabs = $( '.wpspeech-tab' );
+		$( '.speakable-tab' ).on( 'keydown', function ( e ) {
+			var $tabs = $( '.speakable-tab' );
 			var index = $tabs.index( this );
 			var $next;
 
@@ -51,34 +51,34 @@
 		});
 
 		// ---- Color Picker ----
-		$( '.wpspeech-color-field' ).wpColorPicker( {
+		$( '.speakable-color-field' ).wpColorPicker( {
 			change: function ( event, ui ) {
 				// Update mockup live.
 				var color = ui.color.toString();
-				$( '.wpspeech-player-mockup' ).css( '--wpspeech-color', color );
+				$( '.speakable-player-mockup' ).css( '--speakable-color', color );
 			}
 		});
 
 		// ---- Range Sliders ----
-		$( '#wpspeech-speech-rate' ).on( 'input', function () {
+		$( '#speakable-speech-rate' ).on( 'input', function () {
 			var val = parseFloat( this.value ) + 'x';
-			$( '#wpspeech-rate-val' ).text( val );
+			$( '#speakable-rate-val' ).text( val );
 			this.setAttribute( 'aria-valuetext', val );
 		});
-		$( '#wpspeech-pitch' ).on( 'input', function () {
+		$( '#speakable-pitch' ).on( 'input', function () {
 			var val = parseFloat( this.value );
-			$( '#wpspeech-pitch-val' ).text( val );
+			$( '#speakable-pitch-val' ).text( val );
 			this.setAttribute( 'aria-valuetext', String( val ) );
 		});
-		$( '#wpspeech-volume' ).on( 'input', function () {
+		$( '#speakable-volume' ).on( 'input', function () {
 			var val = parseFloat( this.value );
-			$( '#wpspeech-volume-val' ).text( val );
+			$( '#speakable-volume-val' ).text( val );
 			this.setAttribute( 'aria-valuetext', String( val ) );
 		});
 
 		// ---- Voice Dropdown ----
-		var voiceSelect = document.getElementById( 'wpspeech-voice-name' );
-		var savedVoice  = document.getElementById( 'wpspeech-voice-saved' );
+		var voiceSelect = document.getElementById( 'speakable-voice-name' );
+		var savedVoice  = document.getElementById( 'speakable-voice-saved' );
 
 		function populateVoices() {
 			if ( ! voiceSelect || typeof speechSynthesis === 'undefined' ) {
@@ -110,14 +110,14 @@
 		}
 
 		// ---- REST API Toggle ----
-		var $apiToggle   = $( '#wpspeech-rest-api' );
-		var $apiEndpoints = $( '#wpspeech-api-endpoints' );
+		var $apiToggle   = $( '#speakable-rest-api' );
+		var $apiEndpoints = $( '#speakable-api-endpoints' );
 
 		function updateApiEndpoints() {
 			if ( $apiToggle.is( ':checked' ) ) {
-				$apiEndpoints.removeClass( 'wpspeech-api-disabled' );
+				$apiEndpoints.removeClass( 'speakable-api-disabled' );
 			} else {
-				$apiEndpoints.addClass( 'wpspeech-api-disabled' );
+				$apiEndpoints.addClass( 'speakable-api-disabled' );
 			}
 		}
 
@@ -128,10 +128,10 @@
 
 		// ---- Preview ----
 		var isPreviewPlaying = false;
-		var adminI18n = ( window.wpSpeechAdmin && window.wpSpeechAdmin.i18n ) ? window.wpSpeechAdmin.i18n : {};
+		var adminI18n = ( window.speakableAdmin && window.speakableAdmin.i18n ) ? window.speakableAdmin.i18n : {};
 
-		$( '#wpspeech-preview-btn' ).on( 'click', function () {
-			var text = $( '#wpspeech-preview-text' ).val();
+		$( '#speakable-preview-btn' ).on( 'click', function () {
+			var text = $( '#speakable-preview-text' ).val();
 			if ( ! text ) {
 				return;
 			}
@@ -143,9 +143,9 @@
 			}
 
 			var utter    = new SpeechSynthesisUtterance( text );
-			utter.rate   = parseFloat( $( '#wpspeech-speech-rate' ).val() || 1 );
-			utter.pitch  = parseFloat( $( '#wpspeech-pitch' ).val() || 1 );
-			utter.volume = parseFloat( $( '#wpspeech-volume' ).val() || 1 );
+			utter.rate   = parseFloat( $( '#speakable-speech-rate' ).val() || 1 );
+			utter.pitch  = parseFloat( $( '#speakable-pitch' ).val() || 1 );
+			utter.volume = parseFloat( $( '#speakable-volume' ).val() || 1 );
 
 			var voiceName = voiceSelect ? voiceSelect.value : '';
 			if ( voiceName ) {
@@ -171,25 +171,25 @@
 			speechSynthesis.speak( utter );
 		});
 
-		$( '#wpspeech-stop-preview-btn' ).on( 'click', function () {
+		$( '#speakable-stop-preview-btn' ).on( 'click', function () {
 			speechSynthesis.cancel();
 			stopPreviewUI();
 		});
 
 		function startPreviewUI() {
 			isPreviewPlaying = true;
-			$( '#wpspeech-preview-label' ).text( adminI18n.playing || 'Playing...' );
-			$( '#wpspeech-preview-btn' ).css( 'background', 'linear-gradient(135deg, #d60017, #b50014)' );
-			$( '#wpspeech-stop-preview-btn' ).show();
-			$( '#wpspeech-wave' ).show();
+			$( '#speakable-preview-label' ).text( adminI18n.playing || 'Playing...' );
+			$( '#speakable-preview-btn' ).css( 'background', 'linear-gradient(135deg, #d60017, #b50014)' );
+			$( '#speakable-stop-preview-btn' ).show();
+			$( '#speakable-wave' ).show();
 		}
 
 		function stopPreviewUI() {
 			isPreviewPlaying = false;
-			$( '#wpspeech-preview-label' ).text( adminI18n.playPreview || 'Play Preview' );
-			$( '#wpspeech-preview-btn' ).css( 'background', '' );
-			$( '#wpspeech-stop-preview-btn' ).hide();
-			$( '#wpspeech-wave' ).hide();
+			$( '#speakable-preview-label' ).text( adminI18n.playPreview || 'Play Preview' );
+			$( '#speakable-preview-btn' ).css( 'background', '' );
+			$( '#speakable-stop-preview-btn' ).hide();
+			$( '#speakable-wave' ).hide();
 		}
 
 	});
