@@ -1,6 +1,5 @@
 === Speakable ===
-Contributors: devshagor
-Donate link: https://devshagor.com/
+Contributors: themeshape, devshagor
 Tags: text-to-speech, tts, accessibility, audio, speech
 Requires at least: 6.0
 Tested up to: 6.9

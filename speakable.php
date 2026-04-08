@@ -3,16 +3,16 @@
  * Speakable
  *
  * @package Speakable
- * @author            Devshagor
+ * @author            ThemeShape
  * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
  * Plugin Name:       Speakable
- * Plugin URI:        https://devshagor.com/speakable
+ * Plugin URI:        https://wordpress.org/plugins/speakable/
  * Description:       Add a browser-based text-to-speech player to your posts and pages using the Web Speech API. Includes REST API for React Native and mobile apps.
  * Version:           1.0.0
- * Author:            Devshagor
- * Author URI:        https://devshagor.com/
+ * Author:            ThemeShape
+ * Author URI:        https://profiles.wordpress.org/themeshape/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       speakable
@@ -73,18 +73,6 @@ function speakable_activate() {
 	}
 }
 register_activation_hook( __FILE__, 'speakable_activate' );
-
-/**
- * Load plugin text domain for translations.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function speakable_load_textdomain() {
-	load_plugin_textdomain( 'speakable', false, dirname( plugin_basename( SPEAKABLE_PLUGIN_FILE ) ) . '/languages' );
-}
-add_action( 'plugins_loaded', 'speakable_load_textdomain' );
 
 // Load admin class (admin only).
 if ( is_admin() ) {

@@ -15,14 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$options       = get_option( SPEAKABLE_OPTION_KEY, array() );
-$button_color  = isset( $options['button_color'] ) ? $options['button_color'] : '#d60017';
-$show_progress = ! empty( $options['show_progress_bar'] );
-$show_speed    = ! empty( $options['show_speed_control'] );
+$speakable_options       = get_option( SPEAKABLE_OPTION_KEY, array() );
+$speakable_button_color  = isset( $speakable_options['button_color'] ) ? $speakable_options['button_color'] : '#d60017';
+$speakable_show_progress = ! empty( $speakable_options['show_progress_bar'] );
+$speakable_show_speed    = ! empty( $speakable_options['show_speed_control'] );
 ?>
 <div <?php echo get_block_wrapper_attributes(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="speakable-player" role="region" aria-label="<?php esc_attr_e( 'Speakable Player', 'speakable' ); ?>"
-		style="--speakable-color: <?php echo esc_attr( $button_color ); ?>;">
+		style="--speakable-color: <?php echo esc_attr( $speakable_button_color ); ?>;">
 
 		<div class="speakable-header-row">
 			<span class="speakable-headphone-icon" aria-hidden="true">
@@ -49,7 +49,7 @@ $show_speed    = ! empty( $options['show_speed_control'] );
 				<span></span><span></span><span></span><span></span><span></span>
 			</div>
 
-			<?php if ( $show_speed ) : ?>
+			<?php if ( $speakable_show_speed ) : ?>
 			<div class="speakable-speed-control">
 				<label for="speakable-speed" class="screen-reader-text"><?php esc_html_e( 'Playback speed', 'speakable' ); ?></label>
 				<select id="speakable-speed" class="speakable-speed-select">
@@ -65,7 +65,7 @@ $show_speed    = ! empty( $options['show_speed_control'] );
 			<span class="speakable-time" role="status" aria-live="polite"></span>
 		</div>
 
-		<?php if ( $show_progress ) : ?>
+		<?php if ( $speakable_show_progress ) : ?>
 		<div class="speakable-progress-bar" role="progressbar" aria-label="<?php esc_attr_e( 'Reading progress', 'speakable' ); ?>" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
 			<div class="speakable-progress-fill"></div>
 		</div>
