@@ -26,22 +26,11 @@ Speakable adds a play button to your articles that reads the content aloud using
 * Sticky mini-player that follows users while scrolling
 * Mobile-optimized with large touch targets
 * Accessible: ARIA labels, roles, keyboard navigation, and live regions
-* Optional REST API for React Native and mobile app integration (disabled by default)
 * Zero external dependencies — no third-party scripts, fonts, or services
 
 **Gutenberg Block:**
 
 Search for "Speakable Player" in the block inserter to place the player at any position in your content. The block automatically disables global auto-insertion for that post to prevent duplicates.
-
-**REST API for Mobile Apps (opt-in):**
-
-The plugin includes an optional REST API that must be explicitly enabled from the settings page. Once enabled it provides read-only endpoints that return published article text split into sentences, ready for native TTS engines:
-
-* `GET /wp-json/speakable/v1/speech/{id}` — Get article text for TTS
-* `GET /wp-json/speakable/v1/settings` — Get TTS configuration
-* `GET /wp-json/speakable/v1/posts` — List TTS-enabled posts
-
-All endpoints are read-only and only expose publicly available published content. Works with `expo-speech`, `react-native-tts`, or any native TTS library.
 
 **How It Works:**
 
@@ -71,10 +60,6 @@ Chrome 33+, Safari 7+, Firefox 49+, Edge 14+, and most modern mobile browsers.
 
 Yes. Use the "Speakable Player" Gutenberg block to place the player at any position within your content. When the block is used, global auto-insertion is automatically skipped for that post.
 
-= Can I use this with my React Native app? =
-
-Yes. Enable the REST API from Speakable > Settings > API tab, then use the endpoints to fetch article text for native TTS playback.
-
 = Why do voices sound different on different devices? =
 
 Voices are provided by the operating system, not the plugin. Available voices vary by OS (macOS uses Siri voices, Windows uses Microsoft voices, Android uses Google TTS, etc.).
@@ -90,10 +75,6 @@ No. The player only appears on single post/page views, never on archives, search
 = Will this slow down my site? =
 
 No. The plugin only loads its small CSS and JS files on singular pages where TTS is enabled. On all other pages the frontend class is not even loaded. No external scripts, fonts, or services are used.
-
-= Is the REST API enabled by default? =
-
-No. The REST API is disabled by default and must be explicitly enabled by an administrator from Speakable > Settings > API tab.
 
 == Screenshots ==
 
@@ -117,7 +98,6 @@ No. The REST API is disabled by default and must be explicitly enabled by an adm
 * Sticky mini-player during playback
 * Gutenberg block for manual player placement
 * Analytics and Help submenu pages
-* Optional REST API endpoints for mobile app integration (disabled by default)
 * Mobile-optimized touch interface
 * Accessible markup with ARIA attributes and keyboard navigation
 * Performance-optimized: frontend assets only loaded where needed

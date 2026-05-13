@@ -891,56 +891,8 @@ input:checked + .speakable-toggle-switch .speakable-toggle-knob {
 	100% { width: 100%; }
 }
 
-/* ---- API Tab ---- */
-.speakable-api-endpoint {
-	display: flex;
-	gap: 16px;
-	padding: 18px 0;
-	align-items: flex-start;
-}
-
-.speakable-api-endpoint:not(:last-of-type) {
-	border-bottom: 1px solid #f1f5f9;
-}
-
-.speakable-api-method {
-	flex-shrink: 0;
-	padding: 4px 10px;
-	background: #dcfce7;
-	color: #166534;
-	font-size: 11px;
-	font-weight: 700;
-	border-radius: 6px;
-	letter-spacing: 0.5px;
-	margin-top: 2px;
-}
-
-.speakable-api-title {
-	font-size: 14px;
-	font-weight: 600;
-	color: #1e293b;
-	margin: 0 0 6px;
-	padding: 0;
-}
-
-.speakable-api-url {
-	display: block;
-	padding: 8px 12px;
-	background: #f1f5f9;
-	border-radius: 6px;
-	font-size: 12px;
-	color: #475569;
-	word-break: break-all;
-	margin-bottom: 6px;
-}
-
-.speakable-api-desc {
-	font-size: 13px;
-	color: #64748b;
-	margin: 0;
-}
-
-.speakable-api-note {
+/* ---- Info Note ---- */
+.speakable-info-note {
 	display: flex;
 	gap: 10px;
 	padding: 14px 16px;
@@ -953,26 +905,14 @@ input:checked + .speakable-toggle-switch .speakable-toggle-knob {
 	align-items: flex-start;
 }
 
-.speakable-api-note svg {
+.speakable-info-note svg {
 	flex-shrink: 0;
 	margin-top: 1px;
 }
 
-.speakable-api-note p {
+.speakable-info-note p {
 	margin: 0;
 	line-height: 1.5;
-}
-
-/* ---- API Endpoints Toggle ---- */
-.speakable-api-endpoints-wrap {
-	margin-top: 24px;
-	transition: opacity 0.3s;
-}
-
-.speakable-api-endpoints-wrap.speakable-api-disabled {
-	opacity: 0.4;
-	pointer-events: none;
-	user-select: none;
 }
 
 /* ---- Analytics Stats Grid ---- */
@@ -1250,11 +1190,6 @@ input:checked + .speakable-toggle-switch .speakable-toggle-knob {
 
 	.speakable-slider-row {
 		flex-wrap: wrap;
-	}
-
-	.speakable-api-endpoint {
-		flex-direction: column;
-		gap: 8px;
 	}
 
 	.speakable-stats-grid {

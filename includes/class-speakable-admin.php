@@ -143,7 +143,6 @@ class SPEAKABLE_Admin {
 		$sanitized['show_progress_bar']  = ! empty( $input['show_progress_bar'] );
 		$sanitized['show_speed_control'] = ! empty( $input['show_speed_control'] );
 		$sanitized['sticky_player']      = ! empty( $input['sticky_player'] );
-		$sanitized['rest_api_enabled']   = ! empty( $input['rest_api_enabled'] );
 
 		return $sanitized;
 	}
@@ -210,11 +209,9 @@ class SPEAKABLE_Admin {
 		$progress_bar  = ! empty( $options['show_progress_bar'] );
 		$speed_control = ! empty( $options['show_speed_control'] );
 		$sticky_player  = ! empty( $options['sticky_player'] );
-		$rest_api       = ! empty( $options['rest_api_enabled'] );
 		$enabled_types  = isset( $options['enabled_post_types'] ) ? (array) $options['enabled_post_types'] : array( 'post' );
 		$post_types    = get_post_types( array( 'public' => true ), 'objects' );
 		$opt_key       = SPEAKABLE_OPTION_KEY;
-		$site_url      = home_url();
 		?>
 		<div class="speakable-admin-wrap">
 
@@ -252,10 +249,6 @@ class SPEAKABLE_Admin {
 				<button type="button" class="speakable-tab" data-tab="preview" role="tab" aria-selected="false" aria-controls="speakable-panel-preview" id="speakable-tab-preview" tabindex="-1">
 					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><polygon points="5 3 19 12 5 21 5 3"/></svg>
 					<?php esc_html_e( 'Preview', 'speakable' ); ?>
-				</button>
-				<button type="button" class="speakable-tab" data-tab="api" role="tab" aria-selected="false" aria-controls="speakable-panel-api" id="speakable-tab-api" tabindex="-1">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-					<?php esc_html_e( 'API', 'speakable' ); ?>
 				</button>
 			</div>
 
@@ -497,76 +490,6 @@ class SPEAKABLE_Admin {
 					</div>
 				</div>
 
-				<!-- API Tab -->
-				<div class="speakable-tab-panel" data-panel="api" role="tabpanel" id="speakable-panel-api" aria-labelledby="speakable-tab-api">
-					<div class="speakable-card">
-						<div class="speakable-card-header">
-							<h2 class="speakable-card-title"><?php esc_html_e( 'REST API', 'speakable' ); ?></h2>
-							<p class="speakable-card-desc"><?php esc_html_e( 'Enable REST API endpoints for React Native and mobile apps.', 'speakable' ); ?></p>
-						</div>
-						<div class="speakable-card-body">
-
-							<!-- Enable Toggle -->
-							<div class="speakable-field">
-								<div class="speakable-toggles-list">
-									<label class="speakable-toggle-row">
-										<span class="speakable-toggle-info">
-											<span class="speakable-toggle-name"><?php esc_html_e( 'Enable REST API', 'speakable' ); ?></span>
-											<span class="speakable-toggle-desc"><?php esc_html_e( 'Expose public endpoints for fetching article text and TTS settings', 'speakable' ); ?></span>
-										</span>
-										<span class="speakable-toggle-switch-wrap">
-											<input type="checkbox" id="speakable-rest-api" name="<?php echo esc_attr( $opt_key ); ?>[rest_api_enabled]" value="1" <?php checked( $rest_api ); ?> />
-											<span class="speakable-toggle-switch"><span class="speakable-toggle-knob"></span></span>
-										</span>
-									</label>
-								</div>
-							</div>
-
-							<!-- Endpoints (shown always for reference, but note they only work when enabled) -->
-							<div class="speakable-api-endpoints-wrap" id="speakable-api-endpoints">
-
-								<div class="speakable-api-endpoint">
-									<div class="speakable-api-method">GET</div>
-									<div class="speakable-api-details">
-										<h3 class="speakable-api-title"><?php esc_html_e( 'Get Speech Data', 'speakable' ); ?></h3>
-										<code class="speakable-api-url"><?php echo esc_html( $site_url ); ?>/wp-json/speakable/v1/speech/{post_id}</code>
-										<p class="speakable-api-desc"><?php esc_html_e( 'Returns article title, plain text, sentences array, word count, estimated duration, and TTS settings.', 'speakable' ); ?></p>
-									</div>
-								</div>
-
-								<div class="speakable-api-endpoint">
-									<div class="speakable-api-method">GET</div>
-									<div class="speakable-api-details">
-										<h3 class="speakable-api-title"><?php esc_html_e( 'Get TTS Settings', 'speakable' ); ?></h3>
-										<code class="speakable-api-url"><?php echo esc_html( $site_url ); ?>/wp-json/speakable/v1/settings</code>
-										<p class="speakable-api-desc"><?php esc_html_e( 'Returns speech rate, pitch, volume, voice name, and enabled post types.', 'speakable' ); ?></p>
-									</div>
-								</div>
-
-								<div class="speakable-api-endpoint">
-									<div class="speakable-api-method">GET</div>
-									<div class="speakable-api-details">
-										<h3 class="speakable-api-title"><?php esc_html_e( 'List TTS Posts', 'speakable' ); ?></h3>
-										<code class="speakable-api-url"><?php echo esc_html( $site_url ); ?>/wp-json/speakable/v1/posts?per_page=10&amp;page=1</code>
-										<p class="speakable-api-desc"><?php esc_html_e( 'Paginated list of TTS-enabled posts with metadata and speech endpoint URLs.', 'speakable' ); ?></p>
-									</div>
-								</div>
-
-								<div class="speakable-api-note">
-									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-									<p><?php esc_html_e( 'All endpoints are public and require no authentication. Use expo-speech or react-native-tts in your app to play the returned sentences.', 'speakable' ); ?></p>
-								</div>
-
-							</div>
-
-						</div>
-					</div>
-
-					<div class="speakable-save-row">
-						<?php submit_button( __( 'Save Settings', 'speakable' ), 'primary speakable-save-btn', 'submit', false ); ?>
-					</div>
-				</div>
-
 			</form>
 
 		</div>
@@ -588,7 +511,6 @@ class SPEAKABLE_Admin {
 		$options        = get_option( SPEAKABLE_OPTION_KEY, array() );
 		$enabled_types  = isset( $options['enabled_post_types'] ) ? (array) $options['enabled_post_types'] : array( 'post' );
 		$speech_rate    = isset( $options['speech_rate'] ) ? (float) $options['speech_rate'] : 1.0;
-		$rest_api       = ! empty( $options['rest_api_enabled'] );
 		$progress_bar   = ! empty( $options['show_progress_bar'] );
 		$speed_control  = ! empty( $options['show_speed_control'] );
 		$sticky_player  = ! empty( $options['sticky_player'] );
@@ -657,16 +579,6 @@ class SPEAKABLE_Admin {
 								<span class="speakable-stat-label"><?php esc_html_e( 'Default Speed', 'speakable' ); ?></span>
 							</div>
 						</div>
-
-						<div class="speakable-stat-card">
-							<div class="speakable-stat-icon" style="background: <?php echo esc_attr( $rest_api ? '#f0fdf4' : '#fef2f2' ); ?>; color: <?php echo esc_attr( $rest_api ? '#22c55e' : '#ef4444' ); ?>;">
-								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-							</div>
-							<div class="speakable-stat-info">
-								<span class="speakable-stat-value"><?php echo $rest_api ? esc_html__( 'Enabled', 'speakable' ) : esc_html__( 'Disabled', 'speakable' ); ?></span>
-								<span class="speakable-stat-label"><?php esc_html_e( 'REST API', 'speakable' ); ?></span>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -695,11 +607,6 @@ class SPEAKABLE_Admin {
 								'name'    => __( 'Sticky Player', 'speakable' ),
 								'enabled' => $sticky_player,
 								'icon'    => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
-							),
-							array(
-								'name'    => __( 'REST API', 'speakable' ),
-								'enabled' => $rest_api,
-								'icon'    => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>',
 							),
 						);
 						foreach ( $features as $feature ) :
@@ -742,7 +649,7 @@ class SPEAKABLE_Admin {
 			<!-- Coming Soon -->
 			<div class="speakable-card" style="margin-top: 20px;">
 				<div class="speakable-card-body">
-					<div class="speakable-api-note">
+					<div class="speakable-info-note">
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
 						<p><?php esc_html_e( 'Detailed playback analytics (total plays, average listen duration, most-listened posts) are coming in a future update. Stay tuned!', 'speakable' ); ?></p>
 					</div>
@@ -813,11 +720,6 @@ class SPEAKABLE_Admin {
 						<div class="speakable-help-item">
 							<h3 class="speakable-help-q"><?php esc_html_e( 'Does this plugin slow down my site?', 'speakable' ); ?></h3>
 							<p class="speakable-help-a"><?php esc_html_e( 'No. The plugin loads a single lightweight CSS and JS file only on pages where the player is displayed. There are no external API calls, no server-side processing, and no impact on page load speed.', 'speakable' ); ?></p>
-						</div>
-
-						<div class="speakable-help-item">
-							<h3 class="speakable-help-q"><?php esc_html_e( 'How do I use the REST API?', 'speakable' ); ?></h3>
-							<p class="speakable-help-a"><?php esc_html_e( 'The plugin provides public REST API endpoints for React Native and mobile apps. Enable it from Speakable > Settings > API tab, then check the endpoint URLs and documentation. No authentication required.', 'speakable' ); ?></p>
 						</div>
 
 					</div>

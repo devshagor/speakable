@@ -109,23 +109,6 @@
 			speechSynthesis.onvoiceschanged = populateVoices;
 		}
 
-		// ---- REST API Toggle ----
-		var $apiToggle   = $( '#speakable-rest-api' );
-		var $apiEndpoints = $( '#speakable-api-endpoints' );
-
-		function updateApiEndpoints() {
-			if ( $apiToggle.is( ':checked' ) ) {
-				$apiEndpoints.removeClass( 'speakable-api-disabled' );
-			} else {
-				$apiEndpoints.addClass( 'speakable-api-disabled' );
-			}
-		}
-
-		if ( $apiToggle.length ) {
-			updateApiEndpoints();
-			$apiToggle.on( 'change', updateApiEndpoints );
-		}
-
 		// ---- Preview ----
 		var isPreviewPlaying = false;
 		var adminI18n = ( window.speakableAdmin && window.speakableAdmin.i18n ) ? window.speakableAdmin.i18n : {};

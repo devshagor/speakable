@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       Speakable
  * Plugin URI:        https://wordpress.org/plugins/speakable/
- * Description:       Add a browser-based text-to-speech player to your posts and pages using the Web Speech API. Includes REST API for React Native and mobile apps.
+ * Description:       Add a browser-based text-to-speech player to your posts and pages using the Web Speech API.
  * Version:           1.0.0
  * Author:            ThemeShape
  * Author URI:        https://profiles.wordpress.org/themeshape/
@@ -65,7 +65,6 @@ function speakable_activate() {
 		'show_progress_bar'  => true,
 		'show_speed_control' => true,
 		'sticky_player'      => true,
-		'rest_api_enabled'   => false,
 	);
 
 	if ( false === get_option( SPEAKABLE_OPTION_KEY ) ) {
@@ -89,11 +88,3 @@ if ( ! is_admin() && ! wp_doing_ajax() && ! defined( 'REST_REQUEST' ) && ! defin
 // Load Gutenberg blocks (needed on both admin and frontend for SSR).
 require_once SPEAKABLE_PLUGIN_DIR . 'includes/class-speakable-blocks.php';
 new SPEAKABLE_Blocks();
-
-// Load REST API class only if enabled in settings.
-$speakable_opts = get_option( SPEAKABLE_OPTION_KEY, array() );
-if ( ! empty( $speakable_opts['rest_api_enabled'] ) ) {
-	require_once SPEAKABLE_PLUGIN_DIR . 'includes/class-speakable-rest-api.php';
-	new SPEAKABLE_REST_API();
-}
-unset( $speakable_opts );
