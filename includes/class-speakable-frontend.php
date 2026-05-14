@@ -68,6 +68,9 @@ class SPEAKABLE_Frontend {
 			true
 		);
 
+		$queried_id = get_queried_object_id();
+		$post_title = $queried_id ? get_the_title( $queried_id ) : '';
+
 		wp_localize_script( 'speakable-frontend', 'speakableSettings', array(
 			'voiceName'        => isset( $this->options['voice_name'] ) ? $this->options['voice_name'] : '',
 			'speechRate'       => isset( $this->options['speech_rate'] ) ? (float) $this->options['speech_rate'] : 1.0,
@@ -77,6 +80,7 @@ class SPEAKABLE_Frontend {
 			'showSpeedControl' => ! empty( $this->options['show_speed_control'] ),
 			'buttonColor'      => isset( $this->options['button_color'] ) ? $this->options['button_color'] : '#d60017',
 			'stickyPlayer'     => ! empty( $this->options['sticky_player'] ),
+			'postTitle'        => wp_strip_all_tags( html_entity_decode( $post_title, ENT_QUOTES, 'UTF-8' ) ),
 			'i18n'             => array(
 				'listen'      => __( 'Listen', 'speakable' ),
 				'pause'       => __( 'Pause', 'speakable' ),
@@ -122,7 +126,6 @@ class SPEAKABLE_Frontend {
 				</span>
 				<div>
 					<p class="speakable-player-title"><?php esc_html_e( 'Listen to this article', 'speakable' ); ?></p>
-					<p class="speakable-player-subtitle"><?php esc_html_e( 'Powered by Speakable', 'speakable' ); ?></p>
 				</div>
 			</div>
 

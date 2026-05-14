@@ -76,6 +76,29 @@ No. The player only appears on single post/page views, never on archives, search
 
 No. The plugin only loads its small CSS and JS files on singular pages where TTS is enabled. On all other pages the frontend class is not even loaded. No external scripts, fonts, or services are used.
 
+== Source Code and Development ==
+
+This plugin is fully GPL. The maintained development location is:
+
+https://github.com/devshagor/speakable
+
+The human-readable source for every shipped file is also bundled inside the plugin itself:
+
+* Block editor source: `src/blocks/speakable-player/index.js` and `src/blocks/speakable-player/editor.css`
+* Block render template (server-side): `src/blocks/speakable-player/render.php`
+* Block metadata: `src/blocks/speakable-player/block.json`
+* All PHP classes are unminified and live under `includes/`
+* All admin/frontend CSS and JS are unminified and live under `assets/`
+
+The contents of `build/blocks/speakable-player/` are produced from `src/blocks/speakable-player/` using `@wordpress/scripts`.
+
+To regenerate the build output:
+
+`npm install`
+`npm run build`
+
+This runs `wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blocks`. The `npm run start` command provides a development watch mode.
+
 == Screenshots ==
 
 1. Admin settings page — Voice tab with speed, pitch, and volume sliders

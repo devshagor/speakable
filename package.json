@@ -10,7 +10,7 @@
 		"start": "wp-scripts start --webpack-src-dir=src/blocks --output-path=build/blocks",
 		"lint:js": "wp-scripts lint-js src/blocks/",
 		"lint:css": "wp-scripts lint-style src/blocks/",
-		"zip": "npm run build && rm -rf production && mkdir -p production/speakable && rsync -av --exclude='node_modules' --exclude='.git' --exclude='.gitignore' --exclude='src' --exclude='production' --exclude='package.json' --exclude='package-lock.json' --exclude='README.md' --exclude='.editorconfig' --exclude='.eslintrc' --exclude='.prettierrc' ./ production/speakable/ && cd production && zip -r speakable.zip speakable/ && rm -rf speakable && echo '✓ production/speakable.zip is ready'"
+		"zip": "npm run build && rm -rf production && mkdir -p production/speakable && rsync -av --exclude='node_modules' --exclude='.git' --exclude='.gitignore' --exclude='.gitattributes' --exclude='.claude' --exclude='.DS_Store' --exclude='production' --exclude='package.json' --exclude='package-lock.json' --exclude='README.md' --exclude='.editorconfig' --exclude='.eslintrc' --exclude='.prettierrc' ./ production/speakable/ && cd production && zip -r speakable.zip speakable/ && rm -rf speakable && echo '✓ production/speakable.zip is ready'"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^30.0.0"

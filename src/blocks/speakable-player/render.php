@@ -30,7 +30,6 @@ $speakable_show_speed    = ! empty( $speakable_options['show_speed_control'] );
 			</span>
 			<div>
 				<p class="speakable-player-title"><?php esc_html_e( 'Listen to this article', 'speakable' ); ?></p>
-				<p class="speakable-player-subtitle"><?php esc_html_e( 'Powered by Speakable', 'speakable' ); ?></p>
 			</div>
 		</div>
 

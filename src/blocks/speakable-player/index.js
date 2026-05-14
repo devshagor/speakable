@@ -72,8 +72,7 @@
 								el( 'path', { d: 'M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z' } )
 							),
 							el( 'div', {},
-								el( 'div', { className: 'speakable-block-title' }, i18n.__( 'Listen to this article', 'speakable' ) ),
-								el( 'div', { className: 'speakable-block-subtitle' }, i18n.__( 'Powered by Speakable', 'speakable' ) )
+								el( 'div', { className: 'speakable-block-title' }, i18n.__( 'Listen to this article', 'speakable' ) )
 							)
 						),
 

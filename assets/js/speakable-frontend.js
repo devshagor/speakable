@@ -51,11 +51,12 @@
 		timeDisplay  = document.querySelector( '.speakable-time' );
 		speedSelect  = document.querySelector( '.speakable-speed-select' );
 
-		// Find article content - try theme-specific then generic selectors.
-		contentEl = document.querySelector( '.single-post-body' )
-				 || document.querySelector( '.entry-content' )
-				 || document.querySelector( '.post-content' )
-				 || document.querySelector( 'article' );
+		// Scope the content to the player's own ancestor so we read the article
+		// body the player was injected into — never a related-post card or sidebar.
+		contentEl = playerEl && (
+			playerEl.closest( '.single-post-body, .entry-content, .post-content, article' )
+			|| playerEl.parentElement
+		);
 
 		if ( ! playBtn || ! contentEl ) {
 			return;
@@ -68,7 +69,14 @@
 			playerInClone.remove();
 		}
 		var rawText = contentClone.innerText || contentClone.textContent;
-		sentences   = splitIntoSentences( rawText );
+
+		// Prepend the post title so it's the first thing read.
+		var titleText = ( settings.postTitle || '' ).trim();
+		if ( titleText ) {
+			rawText = titleText.replace( /[.!?]?\s*$/, '.' ) + ' ' + rawText;
+		}
+
+		sentences = splitIntoSentences( rawText );
 
 		// Event listeners.
 		playBtn.addEventListener( 'click', togglePlayPause );
