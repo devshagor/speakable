@@ -3,7 +3,7 @@ Contributors: themeshape, devshagor
 Tags: text-to-speech, tts, accessibility, audio, speech
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -110,6 +110,11 @@ This runs `wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blo
 
 == Changelog ==
 
+= 1.0.1 =
+* Fix: player no longer reads related-post titles or meta — content extraction is now scoped to the player's own article container.
+* Improvement: the post title is now read before the article body.
+* Docs: added a Source Code and Development section to the readme pointing to the public GitHub repository.
+
 = 1.0.0 =
 * Initial release
 * Browser-based TTS using Web Speech API
@@ -126,6 +131,9 @@ This runs `wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blo
 * Performance-optimized: frontend assets only loaded where needed
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Fixes the player reading related-post content. Recommended upgrade.
 
 = 1.0.0 =
 Initial release.

@@ -10,7 +10,7 @@
  * Plugin Name:       Speakable
  * Plugin URI:        https://wordpress.org/plugins/speakable/
  * Description:       Add a browser-based text-to-speech player to your posts and pages using the Web Speech API.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            ThemeShape
  * Author URI:        https://profiles.wordpress.org/themeshape/
  * License:           GPL v2 or later
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Prevent constant redefinition.
 if ( ! defined( 'SPEAKABLE_VERSION' ) ) {
-	define( 'SPEAKABLE_VERSION', '1.0.0' );
+	define( 'SPEAKABLE_VERSION', '1.0.1' );
 }
 if ( ! defined( 'SPEAKABLE_PLUGIN_FILE' ) ) {
 	define( 'SPEAKABLE_PLUGIN_FILE', __FILE__ );
