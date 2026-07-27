@@ -1,5 +1,5 @@
 === Speakable ===
-Contributors: themeshape, devshagor
+Contributors: themeshape, shagors
 Tags: text-to-speech, tts, accessibility, audio, speech
 Requires at least: 6.0
 Tested up to: 6.9
@@ -101,12 +101,12 @@ This runs `wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blo
 
 == Screenshots ==
 
-1. Admin settings page — Voice tab with speed, pitch, and volume sliders
-2. Admin settings page — Display tab with post type chips and position cards
-3. Admin settings page — Preview tab with live player mockup
-4. Frontend player bar at the top of an article
-5. Player in active state with progress bar and sticky mini-player
-6. Gutenberg block in the editor with duplicate detection notice
+1. The player bar on a published article, ready to read the post aloud
+2. Active playback with progress bar and sentence counter
+3. Voice settings — choose voice and adjust speed, pitch, and volume
+4. Display settings — post types, button color, and player position
+5. Live preview — test the current voice settings before saving
+6. Analytics overview — TTS-enabled posts and player feature status
 
 == Changelog ==
 
@@ -114,6 +114,7 @@ This runs `wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blo
 * Fix: player no longer reads related-post titles or meta — content extraction is now scoped to the player's own article container.
 * Improvement: the post title is now read before the article body.
 * Docs: added a Source Code and Development section to the readme pointing to the public GitHub repository.
+* Fixes the player reading related-post content. Recommended upgrade.
 
 = 1.0.0 =
 * Initial release
@@ -129,11 +130,3 @@ This runs `wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blo
 * Mobile-optimized touch interface
 * Accessible markup with ARIA attributes and keyboard navigation
 * Performance-optimized: frontend assets only loaded where needed
-
-== Upgrade Notice ==
-
-= 1.0.1 =
-Fixes the player reading related-post content. Recommended upgrade.
-
-= 1.0.0 =
-Initial release.
